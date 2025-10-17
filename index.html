@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mila's Moonlit Garden</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:wght@300;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Mila's Moonlit Garden</h1>
+      <p class="tagline">An interactive bedtime adventure</p>
+      <button id="start-story" class="primary">Start the Story</button>
+    </header>
+
+    <main>
+      <section id="book" aria-live="polite">
+        <div class="page" id="page">
+          <div class="page-decor" aria-hidden="true"></div>
+          <div class="page-illustration" id="illustration"></div>
+          <div class="page-content">
+            <h2 id="page-title"></h2>
+            <div id="story-text"></div>
+            <div id="choices" class="choices" aria-live="polite"></div>
+            <div id="activity" class="activity" aria-live="polite"></div>
+            <div id="fun-fact" class="fun-fact"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="controls">
+        <div class="control-group">
+          <button id="prev-page" class="secondary" disabled>Previous</button>
+          <button id="read-aloud" class="secondary">Read Along</button>
+          <button id="next-page" class="secondary" disabled>Next</button>
+        </div>
+        <label for="progress">Adventure progress</label>
+        <progress id="progress" value="0" max="1">0%</progress>
+        <p id="status" class="status" aria-live="polite"></p>
+      </aside>
+    </main>
+
+    <footer>
+      <p>
+        Tip: Click on glowing items to uncover surprises, and answer the riddles to
+        help Mila and her friends.
+      </p>
+    </footer>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
