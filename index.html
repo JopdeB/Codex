@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mila's Moonlit Garden</title>
+    <title>Starlit Stories - Interactive Book Framework</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,43 +13,47 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Mila's Moonlit Garden</h1>
-      <p class="tagline">An interactive bedtime adventure</p>
-      <button id="start-story" class="primary">Start the Story</button>
+    <header class="site-header">
+      <div class="header-text">
+        <h1>Starlit Stories</h1>
+        <p class="tagline">A ready-to-publish framework for children's chapter books</p>
+        <button id="start-reading" class="primary">Open the Book</button>
+      </div>
+      <div class="header-illustration" aria-hidden="true"></div>
     </header>
 
     <main>
-      <section id="book" aria-live="polite">
-        <div class="page" id="page">
-          <div class="page-decor" aria-hidden="true"></div>
-          <div class="page-illustration" id="illustration"></div>
-          <div class="page-content">
-            <h2 id="page-title"></h2>
-            <div id="story-text"></div>
-            <div id="choices" class="choices" aria-live="polite"></div>
-            <div id="activity" class="activity" aria-live="polite"></div>
-            <div id="fun-fact" class="fun-fact"></div>
-          </div>
-        </div>
-      </section>
-
-      <aside class="controls">
-        <div class="control-group">
-          <button id="prev-page" class="secondary" disabled>Previous</button>
-          <button id="read-aloud" class="secondary">Read Along</button>
-          <button id="next-page" class="secondary" disabled>Next</button>
-        </div>
-        <label for="progress">Adventure progress</label>
-        <progress id="progress" value="0" max="1">0%</progress>
-        <p id="status" class="status" aria-live="polite"></p>
+      <aside class="toc" aria-label="Table of contents">
+        <h2>Chapters</h2>
+        <ol id="chapter-list" class="chapter-list"></ol>
       </aside>
+
+      <section id="reader" class="reader" aria-live="polite">
+        <article class="page" id="page">
+          <div class="page-image">
+            <img id="page-illustration" alt="" />
+          </div>
+          <div class="page-body">
+            <header class="page-header">
+              <p id="page-number" class="page-number"></p>
+              <h2 id="page-title"></h2>
+            </header>
+            <div id="page-content" class="page-content"></div>
+          </div>
+        </article>
+
+        <footer class="page-controls">
+          <button id="prev" class="secondary" disabled>Previous</button>
+          <progress id="progress" value="0" max="1" aria-label="Story progress">0%</progress>
+          <button id="next" class="secondary" disabled>Next</button>
+        </footer>
+      </section>
     </main>
 
-    <footer>
+    <footer class="site-footer">
       <p>
-        Tip: Click on glowing items to uncover surprises, and answer the riddles to
-        help Mila and her friends.
+        Use the framework to drop in your own manuscript, swap in final illustrations,
+        and publish a polished ten-chapter adventure in minutes.
       </p>
     </footer>
 

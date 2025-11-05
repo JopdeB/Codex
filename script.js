@@ -1,466 +1,244 @@
-const pages = [
+const palette = [
+  { from: "#ff9a9e", to: "#fad0c4" },
+  { from: "#a1c4fd", to: "#c2e9fb" },
+  { from: "#fbc2eb", to: "#a6c1ee" },
+  { from: "#84fab0", to: "#8fd3f4" },
+  { from: "#fddb92", to: "#d1fdff" },
+  { from: "#ffecd2", to: "#fcb69f" },
+  { from: "#cfd9df", to: "#e2ebf0" },
+  { from: "#d4fc79", to: "#96e6a1" },
+  { from: "#fbc7d4", to: "#9795ef" },
+  { from: "#f6d365", to: "#fda085" },
+  { from: "#89f7fe", to: "#66a6ff" },
+];
+
+function createIllustration(title, subtitle, colors) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="${colors.from}"/>
+        <stop offset="100%" stop-color="${colors.to}"/>
+      </linearGradient>
+    </defs>
+    <rect width="800" height="600" rx="48" fill="url(#grad)"/>
+    <g fill="#ffffff" opacity="0.5">
+      <circle cx="120" cy="120" r="48"/>
+      <circle cx="680" cy="140" r="32"/>
+      <circle cx="200" cy="520" r="28"/>
+      <circle cx="620" cy="460" r="44"/>
+    </g>
+    <text x="50%" y="45%" text-anchor="middle" font-family="'Chewy', 'Nunito', sans-serif" font-size="64" fill="#ffffff">${title}</text>
+    <text x="50%" y="60%" text-anchor="middle" font-family="'Nunito', sans-serif" font-size="28" fill="#ffffff">${subtitle}</text>
+  </svg>`;
+
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+const story = [
   {
-    id: "start",
-    title: "A Moonbeam Invitation",
-    scene: "moon",
-    illustrationAlt: "Mila gazing up at the moon as sparkles swirl in her garden.",
-    content: [
-      "The moon leaned low over Mila's window, painting her garden in silver light. A shimmering envelope drifted onto her pillow with a soft pop of stardust.",
-      "Inside was a letter written in twinkling ink: 'Dear Mila, the Moonlit Garden is blooming tonight, and the fireflies have a mystery to solve. Will you join us?'",
+    type: "cover",
+    title: "Mila's Moonlit Garden",
+    subtitle: "An interactive bedtime adventure",
+    description: [
+      "Welcome to a digital-first picture book experience. This framework packages your manuscript, illustrations, and chapter summaries so you can launch a magical story without writing new code.",
+      "Swap in custom copy and artwork, or use the starter content to prototype a bedtime journey for young readers.",
     ],
-    funFact:
-      "Fireflies use their glow to talk to one another—some even flash in special patterns to say hello!",
-    next: "gardenGathering",
-    progressIndex: 1,
-    status: "Mila has discovered a magical invitation. Tap Next when you're ready to follow her outside!",
   },
   {
-    id: "gardenGathering",
-    title: "Footsteps in the Glow",
-    scene: "garden",
-    illustrationAlt: "Fireflies swirling around flowers shaped like stars in Mila's garden.",
-    content: [
-      "Mila tiptoed into the night. Flowers shaped like stars hummed gentle notes while fireflies circled in excited loops.",
-      "Captain Glimmer, the tiniest firefly with the bravest heart, zipped to her shoulder. 'We're missing the moon's lullaby,' he whispered. 'Will you help us find it?'",
+    title: "Invitation Under the Stars",
+    subtitle: "Chapter One",
+    description: [
+      "Moonlight spills across Mila's windowsill along with a shimmering note. The fireflies are hosting a midnight celebration and only the bravest dreamers are invited.",
+      "Introduce the main character and the spark that begins the adventure. Keep sentences short and rhythmic to support read-aloud sessions.",
     ],
-    funFact:
-      "Some flowers close their petals at night to keep warm and safe—these are called 'nyctinastic' plants!",
-    activity: {
-      type: "prompt",
-      question: "What do you think the moon's lullaby might sound like? Use a describing word!",
-      placeholder: "e.g. soft, shimmery, gentle",
-      correctAnswers: ["soft", "gentle", "calm", "hushed", "quiet", "shimmery", "glowing", "sweet"],
-      successMessage: "Beautiful! Captain Glimmer nods. 'That's just the kind of song we're searching for.'",
-      retryMessage: "That's a curious guess! Try a describing word—think of how a bedtime song makes you feel.",
-    },
-    next: "chooseFriend",
-    progressIndex: 2,
-    status: "Captain Glimmer needs a word to guide the search. Share one to warm up the lullaby!",
   },
   {
-    id: "chooseFriend",
-    title: "Choosing a Guide",
-    scene: "garden",
-    illustrationAlt: "Two friendly creatures waiting at a fork in the glowing path.",
-    content: [
-      "Two garden friends stepped from the glow. Whistle the owl twirled a silver feather, and Ripple the frog balanced moon drops on his fingertips.",
-      "'Pick me,' hooted Whistle. 'I'll lead you through the Forest of Whispers.' Ripple grinned. 'Or come with me to the Sparkle Pond. Lullabies love water!'",
+    title: "Footsteps on the Glow Path",
+    subtitle: "Chapter Two",
+    description: [
+      "Mila tiptoes into the garden, following glowing stepping stones that appear one by one. Each step reveals a new sound and scent for young readers to explore.",
+      "Use this chapter to show off sensory details. Encourage interaction by prompting children to mimic the sounds Mila hears.",
     ],
-    funFact:
-      "Owls can swivel their heads almost all the way around to spot helpful clues in the dark!",
-    choices: [
-      {
-        text: "Follow Whistle into the Forest of Whispers",
-        next: "forestSong",
-        summary: "Whistle glides ahead between glowing trees.",
-      },
-      {
-        text: "Bounce with Ripple to the Sparkle Pond",
-        next: "sparklePond",
-        summary: "Ripple splashes laughter on every lily pad.",
-      },
-    ],
-    progressIndex: 3,
-    status: "Which friend feels right for the journey? Tap a path to continue the adventure.",
   },
   {
-    id: "forestSong",
-    title: "The Forest of Whispers",
-    scene: "forest",
-    illustrationAlt: "Tall trees with glowing leaves and soft musical notes floating between branches.",
-    content: [
-      "Whistle's wings brushed song notes from the leaves. Every tree hummed a piece of the lullaby, but the last notes hid in tiny lantern fruits dangling low.",
-      "'They shy away unless you're gentle,' Whistle said. 'Maybe a friendly touch will coax them out.'",
+    title: "The Whispering Trees",
+    subtitle: "Chapter Three",
+    description: [
+      "Tall trees bend low to greet Mila, their leaves rustling secret messages. She meets Whistle the owl, who offers to guide her deeper into the Moonlit Garden.",
+      "Introduce supporting characters and lay the groundwork for choices that keep kids engaged with the narrative.",
     ],
-    funFact:
-      "Many plants use their leaves like tiny solar panels to sip energy during the day and glow softly at night in our story world!",
-    activity: {
-      type: "collect",
-      instruction: "Tap the lantern fruits to gather the final notes.",
-      items: ["Do", "Re", "Mi"],
-      successMessage: "With the notes collected, the forest hums a warm chord that wraps around Mila like a hug.",
-    },
-    next: "celebration",
-    progressIndex: 4,
-    status: "There are three shy lantern fruits here. Collect them all to finish the forest melody!",
   },
   {
-    id: "sparklePond",
-    title: "Secrets of the Sparkle Pond",
-    scene: "pond",
-    illustrationAlt: "A pond shimmering with ripples shaped like music notes.",
-    content: [
-      "Ripple bounced from lily pad to lily pad, sending rings of light across the water. Every ripple chimed a different note.",
-      "'If we match the ripples to the right pattern, the lullaby will rise from the pond,' Ripple croaked. 'Can you remember the rhythm?'",
+    title: "Songs of the Sparkle Pond",
+    subtitle: "Chapter Four",
+    description: [
+      "At the pond, Ripple the frog plucks melodies from the water. Mila learns that music can unlock hidden doors throughout the night.",
+      "This chapter can host your first mini-activity. Invite readers to clap a rhythm or hum along as Mila discovers the pond's tune.",
     ],
-    funFact:
-      "Frogs sing to each other using their throats like stretchy drums—each species has its own special rhythm!",
-    activity: {
-      type: "prompt",
-      question: "Clap a rhythm and then type a word that matches its beat (like 'ta-da' or 'la-la-la').",
-      placeholder: "Type your rhythm here",
-      correctAnswers: ["ta-da", "la-la", "la-la-la", "dum-dee", "ta-da-da", "la-la-la"],
-      successMessage: "Ripple repeats your rhythm exactly and the pond glows brighter with every beat!",
-      retryMessage: "Try typing the rhythm the way you clapped it—use small syllables like 'ta' or 'la'.",
-    },
-    next: "celebration",
-    progressIndex: 4,
-    status: "Tap in a playful rhythm so Ripple can echo it back!",
   },
   {
-    id: "celebration",
-    title: "Moonlight Encore",
-    scene: "celebration",
-    illustrationAlt: "Mila and her friends dancing under a full moon with musical fireflies.",
-    content: [
-      "The lullaby twirled into the sky. The moon beamed brighter, and the fireflies drew loops of thanks around Mila's heart.",
-      "Captain Glimmer presented a tiny charm shaped like a crescent. 'Any night you need a song, hold this and we'll be there,' he promised.",
+    title: "Lantern Fruit Quest",
+    subtitle: "Chapter Five",
+    description: [
+      "Lantern fruits sway from silver vines, each containing a glowing note of the moon's lullaby. Mila must collect them gently before they float away.",
+      "Great for simple tap-or-click games, this chapter demonstrates how you can weave interactive tasks between narrative beats.",
     ],
-    funFact:
-      "Music can change how we feel—slow songs help our hearts relax, which is perfect for bedtime adventures!",
-    next: null,
-    progressIndex: 5,
-    status: "You've completed tonight's adventure! Revisit other paths to hear the lullaby in new ways.",
+  },
+  {
+    title: "Firefly Chorus",
+    subtitle: "Chapter Six",
+    description: [
+      "Fireflies swirl in choreographed patterns, spelling out hints for Mila's next step. Captain Glimmer explains the rules of their twinkling language.",
+      "Use this slot to add educational sidebars. Brief facts help caregivers extend the story into a learning moment.",
+    ],
+  },
+  {
+    title: "Moonbeam Maze",
+    subtitle: "Chapter Seven",
+    description: [
+      "Mila enters a maze formed from soft moonbeams. Each turn brightens or dims depending on her confidence in the song she's building.",
+      "Encourage problem solving here—pose a riddle or a simple puzzle that lets readers feel clever when the beams glow brighter.",
+    ],
+  },
+  {
+    title: "Garden of Echoes",
+    subtitle: "Chapter Eight",
+    description: [
+      "Every word Mila whispers repeats through the flowers. She practices the lullaby, fine-tuning the verses that will soothe the night creatures.",
+      "Highlight repetition and call-and-response patterns so adults and children can perform the story together.",
+    ],
+  },
+  {
+    title: "Moonrise Gathering",
+    subtitle: "Chapter Nine",
+    description: [
+      "Friends from each corner of the garden assemble beneath a rising moon. They bring instruments woven from petals, leaves, and twigs.",
+      "This is a perfect place to showcase illustration spreads. Consider a panoramic image to celebrate the entire cast.",
+    ],
+  },
+  {
+    title: "Lullaby's Promise",
+    subtitle: "Chapter Ten",
+    description: [
+      "The completed lullaby drifts into the sky, promising peaceful dreams for every listener. Mila tucks the final note into her pocket for the next adventure.",
+      "Wrap up the journey with a gentle cooldown paragraph and a teaser for future stories to keep readers eager for more.",
+    ],
   },
 ];
 
-const pageMap = new Map(pages.map((page) => [page.id, page]));
-const maxProgress = Math.max(...pages.map((page) => page.progressIndex));
-
-const startButton = document.getElementById("start-story");
-const prevButton = document.getElementById("prev-page");
-const nextButton = document.getElementById("next-page");
-const readButton = document.getElementById("read-aloud");
+const startButton = document.getElementById("start-reading");
+const chapterList = document.getElementById("chapter-list");
+const pageNumber = document.getElementById("page-number");
+const pageTitle = document.getElementById("page-title");
+const pageContent = document.getElementById("page-content");
+const illustration = document.getElementById("page-illustration");
+const prevButton = document.getElementById("prev");
+const nextButton = document.getElementById("next");
 const progressBar = document.getElementById("progress");
-const statusElement = document.getElementById("status");
-const titleElement = document.getElementById("page-title");
-const textElement = document.getElementById("story-text");
-const funFactElement = document.getElementById("fun-fact");
-const choicesElement = document.getElementById("choices");
-const activityElement = document.getElementById("activity");
-const illustrationElement = document.getElementById("illustration");
 
-let storyStarted = false;
-let currentPageId = null;
-let readTimer = null;
-let currentWordIndex = 0;
-const visitedSteps = new Set();
-const historyStack = [];
-const pageState = new Map();
+progressBar.max = story.length - 1;
+
+let currentIndex = 0;
+let bookOpened = false;
+
+function buildIllustrations() {
+  story.forEach((entry, index) => {
+    const colors = palette[index % palette.length];
+    const title = entry.type === "cover" ? "Cover" : `Chapter ${index}`;
+    const subtitle = entry.type === "cover" ? entry.subtitle : entry.title;
+    entry.illustration = createIllustration(title, subtitle, colors);
+    entry.alt = `${entry.type === "cover" ? "Cover art" : "Illustration"} for ${entry.title}`;
+  });
+}
+
+function renderTOC() {
+  chapterList.innerHTML = "";
+  story.forEach((entry, index) => {
+    const listItem = document.createElement("li");
+    listItem.className = "chapter-list-item";
+    const button = document.createElement("button");
+    button.className = "chapter-button";
+    button.type = "button";
+    button.dataset.index = index.toString();
+    button.textContent = entry.type === "cover" ? "Cover" : `${entry.subtitle}`;
+    button.addEventListener("click", () => {
+      openBook();
+      goToIndex(index);
+    });
+    listItem.appendChild(button);
+    chapterList.appendChild(listItem);
+  });
+}
+
+function openBook() {
+  if (bookOpened) return;
+  bookOpened = true;
+  startButton.disabled = true;
+  startButton.textContent = "Book Opened";
+  prevButton.disabled = false;
+  nextButton.disabled = false;
+  renderPage(currentIndex);
+}
+
+function goToIndex(index) {
+  currentIndex = Math.min(Math.max(index, 0), story.length - 1);
+  renderPage(currentIndex);
+}
+
+function renderPage(index) {
+  const entry = story[index];
+  if (!entry) return;
+
+  const isCover = entry.type === "cover";
+  pageNumber.textContent = isCover
+    ? "Cover"
+    : `Chapter ${index} of ${story.length - 1}`;
+  pageTitle.textContent = entry.title;
+  pageContent.innerHTML = "";
+  entry.description.forEach((paragraph) => {
+    const p = document.createElement("p");
+    p.textContent = paragraph;
+    pageContent.appendChild(p);
+  });
+
+  illustration.src = entry.illustration;
+  illustration.alt = entry.alt;
+
+  if (!bookOpened) {
+    prevButton.disabled = true;
+    nextButton.disabled = true;
+  } else {
+    prevButton.disabled = index === 0;
+    nextButton.disabled = index === story.length - 1;
+  }
+
+  progressBar.value = index;
+  progressBar.textContent = `${Math.round((index / (story.length - 1)) * 100)}%`;
+
+  document
+    .querySelectorAll(".chapter-button")
+    .forEach((button) => button.classList.remove("active"));
+  const activeButton = document.querySelector(
+    `.chapter-button[data-index="${index}"]`
+  );
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+}
 
 startButton.addEventListener("click", () => {
-  storyStarted = true;
-  startButton.disabled = true;
-  startButton.textContent = "Adventure in Progress";
-  renderPage("start");
+  openBook();
+  goToIndex(0);
 });
 
 prevButton.addEventListener("click", () => {
-  if (historyStack.length === 0) {
-    return;
-  }
-  stopReadAlong();
-  const previous = historyStack.pop();
-  renderPage(previous, { pushHistory: false });
+  goToIndex(currentIndex - 1);
 });
 
 nextButton.addEventListener("click", () => {
-  if (!currentPageId) {
-    return;
-  }
-  const currentPage = pageMap.get(currentPageId);
-  if (!currentPage?.next) {
-    return;
-  }
-  stopReadAlong();
-  renderPage(currentPage.next);
+  goToIndex(currentIndex + 1);
 });
 
-readButton.addEventListener("click", () => {
-  if (!storyStarted || !currentPageId) {
-    return;
-  }
-  if (readTimer) {
-    stopReadAlong();
-  } else {
-    startReadAlong();
-  }
-});
-
-function renderPage(pageId, options = { pushHistory: true }) {
-  const page = pageMap.get(pageId);
-  if (!page) {
-    return;
-  }
-
-  if (currentPageId && options.pushHistory) {
-    historyStack.push(currentPageId);
-  }
-
-  currentPageId = pageId;
-  updateProgress(page);
-  statusElement.textContent = page.status ?? "";
-  titleElement.textContent = page.title;
-  illustrationElement.dataset.scene = page.scene ?? "moon";
-  illustrationElement.setAttribute("aria-label", page.illustrationAlt ?? "");
-  createSparkles(page.scene);
-  renderIllustrationCaption(page);
-
-  textElement.innerHTML = page.content.map((paragraph) => `<p>${wrapWords(paragraph)}</p>`).join("");
-  funFactElement.textContent = page.funFact ?? "";
-
-  renderChoices(page);
-  renderActivity(page);
-  configureNavigation(page);
-  stopReadAlong();
-}
-
-function renderIllustrationCaption(page) {
-  illustrationElement.querySelectorAll(".illustration-caption").forEach((caption) => caption.remove());
-  if (!page.illustrationAlt) {
-    return;
-  }
-  const caption = document.createElement("p");
-  caption.className = "illustration-caption";
-  caption.textContent = page.illustrationAlt;
-  illustrationElement.appendChild(caption);
-}
-
-function wrapWords(text) {
-  return text
-    .split(/(\s+)/)
-    .map((segment) => {
-      if (/^\s+$/.test(segment)) {
-        return segment;
-      }
-      return `<span class="word">${segment}</span>`;
-    })
-    .join("");
-}
-
-function renderChoices(page) {
-  choicesElement.innerHTML = "";
-  if (!page.choices) {
-    return;
-  }
-  page.choices.forEach((choice) => {
-    const button = document.createElement("button");
-    button.className = "choice-btn";
-    button.type = "button";
-    button.textContent = choice.text;
-    button.addEventListener("click", () => {
-      const state = pageState.get(page.id) ?? {};
-      state.selectedChoice = choice.next;
-      pageState.set(page.id, state);
-      statusElement.textContent = choice.summary ?? page.status ?? "";
-      renderPage(choice.next);
-    });
-    choicesElement.appendChild(button);
-  });
-}
-
-function renderActivity(page) {
-  activityElement.innerHTML = "";
-  const activity = page.activity;
-  if (!activity) {
-    activityElement.classList.remove("has-activity");
-    return;
-  }
-  activityElement.classList.add("has-activity");
-  if (activity.type === "prompt") {
-    renderPromptActivity(page, activity);
-  } else if (activity.type === "collect") {
-    renderCollectActivity(page, activity);
-  }
-}
-
-function renderPromptActivity(page, activity) {
-  const state = pageState.get(page.id) ?? {};
-  const title = document.createElement("h3");
-  title.textContent = "Try this!";
-  activityElement.appendChild(title);
-
-  const question = document.createElement("p");
-  question.textContent = activity.question;
-  activityElement.appendChild(question);
-
-  const form = document.createElement("form");
-  form.className = "prompt-form";
-
-  const input = document.createElement("input");
-  input.type = "text";
-  input.placeholder = activity.placeholder ?? "Type here";
-  input.value = state.answer ?? "";
-
-  const submit = document.createElement("button");
-  submit.type = "submit";
-  submit.textContent = state.completed ? "Great job!" : "Share it";
-
-  const feedback = document.createElement("p");
-  feedback.className = "feedback";
-  if (state.completed) {
-    feedback.textContent = activity.successMessage ?? "Wonderful!";
-  }
-
-  form.append(input, submit, feedback);
-  activityElement.appendChild(form);
-
-  if (state.completed) {
-    input.disabled = true;
-    submit.disabled = true;
-  }
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const answer = input.value.trim().toLowerCase();
-    if (!answer) {
-      feedback.textContent = "Try writing your idea!";
-      feedback.dataset.state = "retry";
-      return;
-    }
-    const accepted = activity.correctAnswers?.some((item) => item.toLowerCase() === answer);
-    if (accepted) {
-      state.completed = true;
-      state.answer = input.value.trim();
-      submit.textContent = "Great job!";
-      submit.disabled = true;
-      input.disabled = true;
-      feedback.textContent = activity.successMessage ?? "Wonderful!";
-      feedback.dataset.state = "success";
-    } else {
-      state.completed = false;
-      state.answer = input.value.trim();
-      feedback.textContent = activity.retryMessage ?? "That's an interesting idea—try another!";
-      feedback.dataset.state = "retry";
-    }
-    pageState.set(page.id, state);
-  });
-}
-
-function renderCollectActivity(page, activity) {
-  const state = pageState.get(page.id) ?? { collected: new Set() };
-  if (!(state.collected instanceof Set)) {
-    state.collected = new Set(state.collected ?? []);
-  }
-
-  const title = document.createElement("h3");
-  title.textContent = activity.instruction ?? "Collect the glowing notes.";
-  activityElement.appendChild(title);
-
-  const container = document.createElement("div");
-  container.className = "collect-container";
-
-  const message = document.createElement("p");
-  message.className = "feedback";
-  if (state.collected.size === activity.items.length) {
-    message.textContent = activity.successMessage;
-    message.dataset.state = "success";
-  } else {
-    message.textContent = "Tap each lantern fruit to hear it sing.";
-  }
-
-  activity.items.forEach((label) => {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = "collect-item";
-    item.textContent = label;
-    if (state.collected.has(label)) {
-      item.classList.add("collected");
-    }
-    item.addEventListener("click", () => {
-      if (state.collected.has(label)) {
-        return;
-      }
-      createSparkleBurst(item);
-      state.collected.add(label);
-      item.classList.add("collected");
-      if (state.collected.size === activity.items.length) {
-        message.textContent = activity.successMessage ?? "You gathered every glow!";
-        message.dataset.state = "success";
-      } else {
-        message.textContent = `Only ${activity.items.length - state.collected.size} more to go!`;
-        message.dataset.state = "progress";
-      }
-      pageState.set(page.id, state);
-    });
-    container.appendChild(item);
-  });
-
-  activityElement.append(container, message);
-}
-
-function configureNavigation(page) {
-  prevButton.disabled = historyStack.length === 0;
-  const hasChoices = Array.isArray(page.choices) && page.choices.length > 0;
-  nextButton.disabled = !page.next || hasChoices;
-  nextButton.textContent = page.next ? "Next" : "The End";
-  readButton.disabled = !storyStarted;
-}
-
-function startReadAlong() {
-  const words = textElement.querySelectorAll(".word");
-  if (!words.length) {
-    return;
-  }
-  words.forEach((word) => word.classList.remove("highlight"));
-  currentWordIndex = 0;
-  readButton.textContent = "Stop Read Along";
-  readTimer = setInterval(() => {
-    if (currentWordIndex > 0 && words[currentWordIndex - 1]) {
-      words[currentWordIndex - 1].classList.remove("highlight");
-    }
-    if (currentWordIndex >= words.length) {
-      stopReadAlong();
-      return;
-    }
-    words[currentWordIndex].classList.add("highlight");
-    currentWordIndex += 1;
-  }, 350);
-}
-
-function stopReadAlong() {
-  if (readTimer) {
-    clearInterval(readTimer);
-    readTimer = null;
-  }
-  textElement.querySelectorAll(".word").forEach((word) => word.classList.remove("highlight"));
-  readButton.textContent = "Read Along";
-}
-
-function updateProgress(page) {
-  visitedSteps.add(page.progressIndex);
-  progressBar.value = visitedSteps.size / maxProgress;
-  progressBar.textContent = `${Math.round((visitedSteps.size / maxProgress) * 100)}%`;
-}
-
-function createSparkles(scene) {
-  illustrationElement.querySelectorAll(".sparkle").forEach((sparkle) => sparkle.remove());
-  const count = scene === "celebration" ? 18 : scene === "garden" ? 14 : 10;
-  for (let index = 0; index < count; index += 1) {
-    const sparkle = document.createElement("span");
-    sparkle.className = "sparkle";
-    sparkle.style.top = `${Math.random() * 90}%`;
-    sparkle.style.left = `${Math.random() * 90}%`;
-    sparkle.style.animationDelay = `${Math.random() * 2}s`;
-    sparkle.style.animationDuration = `${1.8 + Math.random()}s`;
-    illustrationElement.appendChild(sparkle);
-  }
-}
-
-function createSparkleBurst(target) {
-  for (let index = 0; index < 4; index += 1) {
-    const sparkle = document.createElement("span");
-    sparkle.className = "sparkle";
-    sparkle.style.top = `${50 + (Math.random() - 0.5) * 80}%`;
-    sparkle.style.left = `${50 + (Math.random() - 0.5) * 80}%`;
-    sparkle.style.animationDuration = `${1 + Math.random()}s`;
-    target.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 1800);
-  }
-}
-
-// Initialize accessibility text when the story hasn't started yet.
-statusElement.textContent = "Press Start to open the moonlit invitation.";
-progressBar.value = 0;
-progressBar.textContent = "0%";
-readButton.disabled = true;
+buildIllustrations();
+renderTOC();
+renderPage(0);
