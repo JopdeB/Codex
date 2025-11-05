@@ -15,9 +15,10 @@ Open `index.html` in je browser om het demoboek te verkennen. Gebruik de knop **
 
 ## Verhaal aanpassen
 
-1. Pas de `story`-array in `script.js` aan met je eigen manuscripttekst. Elke entry gebruikt een `title`, `subtitle` en een array van alineateksten in `description`.
-2. Vervang de gegenereerde SVG-placeholders door definitieve illustraties door de `illustration`-eigenschap na de `story`-array bij te werken.
-3. Stem typografie, kleuren en layout in `styles.css` af op jouw huisstijl of de sfeer van het boek.
+1. Bewerk `story.txt` met je eigen hoofdstukken. Houd voor elk hoofdstuk de kopregel `Hoofdstuk X – Titel` aan en scheid alinea’s met een lege regel.
+2. Werk de `coverEntry`-paragrafen in `script.js` bij om de covertekst van jouw uitgave te tonen.
+3. Pas de illustraties aan door de `createIllustration`-functie te vervangen of door per hoofdstuk een eigen `entry.illustration`-bron te zetten nadat het script geladen is.
+4. Stem typografie, kleuren en layout in `styles.css` af op jouw huisstijl of de sfeer van het boek.
 
 ## Licentie
 
