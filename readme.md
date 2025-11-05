@@ -1,24 +1,24 @@
-# Starlit Stories Interactive Book Framework
+# De Sleutels van Balans - Interactief Kinderboek
 
-This project delivers a ready-to-publish web framework for a children's book with a cover plus ten fully outlined chapters. Each chapter is paired with a vibrant SVG illustration so you can plug in final artwork later without rewriting code.
+Dit project levert een webframework om een kinderboek digitaal te publiceren met een cover en tien volledig uitgeschreven hoofdstukken. Elke scène krijgt een dynamische SVG-illustratie, zodat je later definitieve kunst kunt toevoegen zonder code te herschrijven.
 
 ## Features
 
-- **Eleven story beats**: one cover spread and ten sequential chapters, all navigable through a built-in table of contents.
-- **Dynamic illustrations**: lightweight SVG placeholders are generated in JavaScript to visualize every chapter until production art is ready.
-- **Responsive layout**: the layout adapts across desktop, tablet, and mobile with a persistent navigation rail and polished reading surface.
-- **Progress tracking**: a progress bar and previous/next buttons make it easy for caregivers and kids to resume where they left off.
+- **Elf scènes**: een cover en tien opeenvolgende hoofdstukken met een ingebouwde inhoudsopgave.
+- **Dynamische illustraties**: lichte SVG-placeholders worden in JavaScript gegenereerd totdat het definitieve beeldmateriaal klaarstaat.
+- **Responsieve opmaak**: geschikt voor desktop, tablet en mobiel met een vaste navigatiekolom en comfortabele leestegel.
+- **Voortgangsindicator**: een voortgangsbalk en vorige/volgende-knoppen helpen lezers eenvoudig verder te gaan waar ze gebleven waren.
 
-## Getting Started
+## Aan de slag
 
-Open `index.html` in your browser to explore the demo storybook. Use the **Open the Book** button or click any chapter in the table of contents to jump directly to that section.
+Open `index.html` in je browser om het demoboek te verkennen. Gebruik de knop **Open het boek** of kies een hoofdstuk in de inhoudsopgave om direct naar dat deel te springen.
 
-## Customizing the Story
+## Verhaal aanpassen
 
-1. Update the `story` array in `script.js` with your manuscript copy. Each entry accepts a `title`, `subtitle`, and an array of paragraph strings in `description`.
-2. Replace the generated SVG placeholders with your final art by swapping the `illustration` property after the `story` array is declared.
-3. Adjust typography, colors, and layout in `styles.css` to match your brand or the aesthetic of your book.
+1. Pas de `story`-array in `script.js` aan met je eigen manuscripttekst. Elke entry gebruikt een `title`, `subtitle` en een array van alineateksten in `description`.
+2. Vervang de gegenereerde SVG-placeholders door definitieve illustraties door de `illustration`-eigenschap na de `story`-array bij te werken.
+3. Stem typografie, kleuren en layout in `styles.css` af op jouw huisstijl of de sfeer van het boek.
 
-## License
+## Licentie
 
-This project is provided for prototyping and demonstration purposes. Adapt and extend it to bring your own children's book to life.
+Dit project is bedoeld voor prototyping en demonstratie. Pas het gerust aan om je eigen kinderboek tot leven te brengen.
