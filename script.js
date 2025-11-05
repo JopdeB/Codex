@@ -55,8 +55,11 @@ const coverEntry = {
   type: "cover",
   heading: "Cover",
   subtitle: "Cover",
-  title: "De Sleutels van Balans",
-  description: ["Stap het digitale leesavontuur De Sleutels van Balans binnen en ontmoet de Mandalorian, Grogu en de jonge Jedi meteen op de eerste pagina.", "Gebruik de inhoudsopgave of de navigatieknoppen om snel door alle tien hoofdstukken van het Nederlandse verhaal te reizen en de drie Sleutels van Balans te ontdekken."],
+  title: "De Sleutels van de Melkweg - Deel I: Grogu en de drie sleutels",
+  description: [
+    "Stap het digitale leesavontuur De Sleutels van de Melkweg - Deel I: Grogu en de drie sleutels binnen en ontmoet de Mandalorian, Grogu en de jonge Jedi meteen op de eerste pagina.",
+    "Gebruik de inhoudsopgave of de navigatieknoppen om snel door alle tien hoofdstukken van het Nederlandse verhaal te reizen en de drie Sleutels van de Melkweg te ontdekken.",
+  ],
 };
 
 let story = [];

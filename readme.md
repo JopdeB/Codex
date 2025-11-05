@@ -1,4 +1,4 @@
-# De Sleutels van Balans - Interactief Kinderboek
+# De Sleutels van de Melkweg - Deel I: Grogu en de drie sleutels
 
 Dit project levert een webframework om een kinderboek digitaal te publiceren met een cover en tien volledig uitgeschreven hoofdstukken. Elke scène krijgt een dynamische SVG-illustratie, zodat je later definitieve kunst kunt toevoegen zonder code te herschrijven.
 
