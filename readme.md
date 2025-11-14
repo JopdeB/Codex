@@ -43,6 +43,17 @@ Open `index.html` in je browser om het demoboek te verkennen. Gebruik de knop **
 3. Laat velden weg of verwijder hoofdstukken waarvoor je (nog) geen beeld hebt; het framework gebruikt dan automatisch de zachte SVG-placeholders.
 4. Wijzigingen aan `artwork.json` worden tijdens het laden opgepikt; een ontbrekend bestand resulteert automatisch in de standaardillustraties.
 
+### Stap-voor-stap: afbeeldingen uploaden en koppelen
+
+1. **Bestanden verzamelen** – exporteer je illustraties als `.jpg`, `.png` of `.webp` met een duidelijke naam (bijvoorbeeld `cover-grogu.png`).
+2. **Map openen** – navigeer in je bestandsbeheerder of terminal naar de projectmap en vervolgens naar de submap `images/`.
+3. **Afbeeldingen plaatsen** – kopieer of sleep je bestanden naar `images/`. Controleer dat de bestandsnamen exact overeenkomen met wat je straks in het manifest invult (hoofdletters tellen mee).
+4. **Manifest aanmaken** – kopieer `artwork.sample.json` naar `artwork.json` (bijvoorbeeld met `cp artwork.sample.json artwork.json`). Het project leest alleen `artwork.json` in.
+5. **Paden invullen** – open `artwork.json` in een teksteditor en vul per cover of hoofdstuk het juiste pad in, bijvoorbeeld `"1": { "src": "images/hoofdstuk-1.jpg", "alt": "Grogu onderzoekt de tuin" }`. Gebruik alleen forward slashes (`/`).
+6. **Bestand opslaan** – sla `artwork.json` op. Laat hoofdstukken weg waarvoor je (nog) geen illustratie hebt; de standaard-SVG blijft dan actief.
+7. **Pagina vernieuwen** – open `index.html` opnieuw in je browser of ververs de pagina. De reader haalt het manifest op en toont direct je nieuwe afbeeldingen.
+8. **Veelvoorkomende fouten oplossen** – zie je nog steeds de SVG-placeholder? Controleer of de bestandsnaam klopt, het bestand daadwerkelijk in `images/` staat en er geen tikfout in het JSON-pad zit. Bekijk de browserconsole voor eventuele foutmeldingen over ontbrekende bestanden.
+
 ## Licentie
 
 Dit project is bedoeld voor prototyping en demonstratie. Pas het gerust aan om je eigen kinderboek tot leven te brengen.
