@@ -15,6 +15,7 @@ const palette = [
 const chapterPattern = /Hoofdstuk\s+\d+\s+–\s+[\s\S]*?(?=(?:\nHoofdstuk\s+\d+\s+–\s+)|$)/g;
 
 const storySource = "story.txt";
+const artworkSource = "artwork.json";
 
 function normalizeParagraph(paragraph) {
   return paragraph
@@ -64,6 +65,7 @@ const coverEntry = {
 
 let story = [];
 let chapterCount = 0;
+let artworkConfig = null;
 
 function createIllustration(title, subtitle, colors) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
@@ -166,6 +168,7 @@ function initializeStory(rawStory) {
   storyLoaded = true;
   progressBar.max = Math.max(story.length - 1, 1);
   buildIllustrations();
+  applyArtworkOverrides();
   renderTOC();
   renderPage(0);
   startButton.disabled = false;
@@ -186,6 +189,56 @@ async function loadStory() {
   }
 }
 
+async function loadArtwork() {
+  try {
+    const response = await fetch(artworkSource, { cache: "no-cache" });
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.info("Geen artwork.json gevonden; placeholders worden gebruikt.");
+        return;
+      }
+      throw new Error(`Kon artwork niet ophalen (status ${response.status})`);
+    }
+
+    const data = await response.json();
+    const normalized = { cover: null, chapters: {} };
+
+    if (data && typeof data === "object") {
+      if (data.cover && typeof data.cover.src === "string" && data.cover.src.trim()) {
+        normalized.cover = {
+          src: data.cover.src.trim(),
+          alt:
+            typeof data.cover.alt === "string" && data.cover.alt.trim()
+              ? data.cover.alt.trim()
+              : null,
+        };
+      }
+
+      if (data.chapters && typeof data.chapters === "object") {
+        Object.entries(data.chapters).forEach(([key, value]) => {
+          const chapterNumber = Number(key);
+          if (!Number.isFinite(chapterNumber) || !value || typeof value !== "object") {
+            return;
+          }
+          if (typeof value.src === "string" && value.src.trim()) {
+            normalized.chapters[chapterNumber] = {
+              src: value.src.trim(),
+              alt:
+                typeof value.alt === "string" && value.alt.trim()
+                  ? value.alt.trim()
+                  : null,
+            };
+          }
+        });
+      }
+    }
+
+    artworkConfig = normalized;
+  } catch (error) {
+    console.warn("Kon geen aangepaste illustraties laden:", error);
+  }
+}
+
 function buildIllustrations() {
   if (!story.length) return;
   story.forEach((entry, index) => {
@@ -196,6 +249,28 @@ function buildIllustrations() {
     entry.alt = entry.type === "cover"
       ? `Coverillustratie voor ${entry.title}`
       : `Illustratie bij ${entry.heading}`;
+  });
+}
+
+function applyArtworkOverrides() {
+  if (!artworkConfig || !story.length) {
+    return;
+  }
+
+  const coverEntryInStory = story.find((entry) => entry.type === "cover");
+  if (coverEntryInStory && artworkConfig.cover?.src) {
+    coverEntryInStory.illustration = artworkConfig.cover.src;
+    coverEntryInStory.alt =
+      artworkConfig.cover.alt || `Coverafbeelding van ${coverEntryInStory.title}`;
+  }
+
+  story.forEach((entry) => {
+    if (entry.type !== "chapter") return;
+    const override = artworkConfig.chapters?.[entry.chapterIndex];
+    if (override?.src) {
+      entry.illustration = override.src;
+      entry.alt = override.alt || `Afbeelding bij ${entry.heading}`;
+    }
   });
 }
 
@@ -295,5 +370,10 @@ nextButton.addEventListener("click", () => {
   goToIndex(currentIndex + 1);
 });
 
-showLoadingState();
-loadStory();
+async function bootstrap() {
+  showLoadingState();
+  await loadArtwork();
+  await loadStory();
+}
+
+bootstrap();
