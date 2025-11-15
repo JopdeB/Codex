@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>De Sleutels van de Melkweg - Deel I: Grogu en de drie sleutels</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chewy&family=Nunito:wght@300;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-text">
+        <h1>De Sleutels van de Melkweg - Deel I: Grogu en de drie sleutels</h1>
+        <p class="tagline">Een interactieve Mandalorian-vertelling in tien hoofdstukken</p>
+        <button id="start-reading" class="primary">Open het boek</button>
+      </div>
+      <div class="header-illustration" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <aside class="toc" aria-label="Inhoudsopgave">
+        <h2>Hoofdstukken</h2>
+        <ol id="chapter-list" class="chapter-list"></ol>
+      </aside>
+
+      <section id="reader" class="reader" aria-live="polite">
+        <article class="page" id="page">
+          <div class="page-image">
+            <img id="page-illustration" alt="" />
+          </div>
+          <div class="page-body">
+            <header class="page-header">
+              <p id="page-number" class="page-number"></p>
+              <h2 id="page-title"></h2>
+            </header>
+            <div id="page-content" class="page-content"></div>
+          </div>
+        </article>
+
+        <footer class="page-controls">
+          <button id="prev" class="secondary" disabled>Vorige</button>
+          <progress id="progress" value="0" max="1" aria-label="Voortgang verhaal">0%</progress>
+          <button id="next" class="secondary" disabled>Volgende</button>
+        </footer>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Gebruik dit raamwerk om je eigen verhaaltekst te plaatsen, illustraties te vervangen
+        en binnen enkele minuten een volledige tien hoofdstukken tellende leeservaring te publiceren.
+      </p>
+    </footer>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

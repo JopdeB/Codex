@@ -1,0 +1,16 @@
+{
+  "cover": {
+    "src": "images/cover.jpg",
+    "alt": "Coverillustratie van jouw verhaal"
+  },
+  "chapters": {
+    "1": {
+      "src": "images/hoofdstuk-1.jpg",
+      "alt": "Scènebeeld voor hoofdstuk 1"
+    },
+    "2": {
+      "src": "images/hoofdstuk-2.jpg",
+      "alt": "Scènebeeld voor hoofdstuk 2"
+    }
+  }
+}
